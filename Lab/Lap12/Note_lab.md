@@ -47,7 +47,7 @@ Tạo hàm 'calcAverageHumanAge', hàm này nhận array tuổi của chó ('ag
 
 - Loại trừ tất cả những chú chó có humanAge dưới 18 (điều này cũng giống như việc giữ những chú chó có humanAge từ 18 tuổi trở lên).
 
-—> để loại bỏ các chú chó có humanAge dưới 18 thì dùng filter với điều kiện humanAge < 18
+—> để loại bỏ các chú chó có humanAge dưới 18 thì dùng filter với điều kiện humanAge > 18
 
 - Tính humanage trung bình của các chú chó trưởng thành (bạn nên biết từ những thử thách khác về cách tính trung bình).
 

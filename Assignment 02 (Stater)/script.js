@@ -17,13 +17,70 @@ const tableBodyEl = document.getElementById("tbody");
 const healthyBtn = document.getElementById("healthy-btn");
 const bmiBtn = document.getElementById("bmi-btn");
 
-// tạo biến tạm cho hàm healthyCheck
-let healthyCheck = true;
-
-// mảng chứa thông tin tất cả thú cưng
 renderTableData(petArr);
+function renderTableData(petArr) {
+  tableBodyEl.innerHTML = "";
+  if (typeof petArr === "object" && !Array.isArray(petArr)) {
+    petArr = Object.values(petArr);
+  }
+  petArr.forEach((pet) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+                      <th scope="row">${pet.id}</th>
+                      <td>${pet.name}</td>
+                      <td>${pet.age}</td>
+                      <td>${pet.type}</td>
+                      <td>${pet.weight}</td>
+                      <td>${pet.length}</td>
+                      <td>${pet.breed}</td>
+                      <td>
+                        <i class="bi bi-square-fill" style="color: ${
+                          pet.color
+                        }"></i>
+                      </td>
+                      <td><i class="bi ${
+                        pet.vaccinated
+                          ? "bi-check-circle-fill"
+                          : "bi-x-circle-fill"
+                      }"></i></td>
+                      <td><i class="bi ${
+                        pet.dewormed
+                          ? "bi-check-circle-fill"
+                          : "bi-x-circle-fill"
+                      }"></i></td>
+                      <td><i class="bi ${
+                        pet.sterilized
+                          ? "bi-check-circle-fill"
+                          : "bi-x-circle-fill"
+                      }"></i></td>
+                      
+                      <td>
+                      ${displayTime(pet.date).slice(8, 10)}
+                      /${displayTime(pet.date).slice(5, 7)}
+                      /${displayTime(pet.date).slice(0, 4)}
+                      </td>
+        
+                      <td>
+                      <button class="btn btn-danger" onclick="deletePet('${
+                        pet.id
+                      }')">Delete</button>
+                       </td>
+        `;
+    tableBodyEl.appendChild(row);
+  });
+}
 
-// Bắt sự kiện khi ăn chọn vàotypeInput để hiển thị loại giống theo đúng loại Dog Cat
+// Hàm hiển thị thời gian
+function displayTime(date) {
+  if (typeof date === "string") {
+    return date;
+  } else if (typeof date === "object") {
+    return JSON.parse(JSON.stringify(date));
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Bắt sự kiện khi ấn chọn vào typeInput để hiển thị loại giống theo đúng loại Dog Cat
 typeInput.addEventListener("click", renderBreed);
 // Hãm hiển thị các loại giống đúng với theo từng loại Dog - Cat
 function renderBreed() {
@@ -109,92 +166,6 @@ const deletePet = (petId) => {
   }
 };
 
-// kiểm tra xem thú cưng đã được tiêm đầy đủ chưa
-healthyBtn.addEventListener("click", function () {
-  if (healthyCheck === true) {
-    // Hiển thị thú cưng khỏe mạnh
-    const healthyPetArr = [];
-    // lọc ra mảng các thú cưng khỏe mạnh
-    for (let i = 0; i < petArr.length; i++) {
-      if (petArr[i].vaccinated && petArr[i].dewormed && petArr[i].sterilized)
-        healthyPetArr.push(petArr[i]);
-    }
-
-    //sau khi lọc thì gọi hàm renderTableData để hiển thị thú cưng
-    renderTableData(healthyPetArr);
-
-    // Thay đổi thành nút "Show all pet"
-    healthyBtn.textContent = "Show All Pet";
-    //cập nhập lại biến tạm
-    healthyCheck = false;
-  } else {
-    // hiển thị lại tất cả các thú cưng
-    renderTableData(petArr);
-
-    // Thay đổi thành nút "Show all pet"
-    healthyBtn.textContent = "Show Healthy Pet";
-    // cập nhập lại biến tạm
-    healthyCheck = true;
-  }
-});
-
-function renderTableData(petArr) {
-  tableBodyEl.innerHTML = "";
-  for (let i = 0; i < petArr.length; i++) {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-                  <th scope="row">${petArr[i].id}</th>
-                  <td>${petArr[i].name}</td>
-                  <td>${petArr[i].age}</td>
-                  <td>${petArr[i].type}</td>
-                  <td>${petArr[i].weight}</td>
-                  <td>${petArr[i].length}</td>
-                  <td>${petArr[i].breed}</td>
-                  <td>
-                    <i class="bi bi-square-fill" style="color: ${
-                      petArr[i].color
-                    }"></i>
-                  </td>
-                  <td><i class="bi ${
-                    petArr[i].vaccinated
-                      ? "bi-check-circle-fill"
-                      : "bi-x-circle-fill"
-                  }"></i></td>
-                  <td><i class="bi ${
-                    petArr[i].dewormed
-                      ? "bi-check-circle-fill"
-                      : "bi-x-circle-fill"
-                  }"></i></td>
-                  <td><i class="bi ${
-                    petArr[i].sterilized
-                      ? "bi-check-circle-fill"
-                      : "bi-x-circle-fill"
-                  }"></i></td>
-                  
-                  <td>
-                  ${displayTime(petArr[i].date).slice(8, 10)}
-                  /${displayTime(petArr[i].date).slice(5, 7)}
-                  /${displayTime(petArr[i].date).slice(0, 4)}
-                  </td>
-    
-                  <td>
-                  <button class="btn btn-danger" onclick="deletePet('${
-                    petArr[i].id
-                  }')">Delete</button>
-                   </td>
-    `;
-    tableBodyEl.appendChild(row);
-  }
-}
-
-// Hàm hiển thị thời gian
-function displayTime(date) {
-  if (typeof date === "string") {
-    return date;
-  } else if (typeof date === "object") {
-    return JSON.parse(JSON.stringify(date));
-  }
-}
 //Kiểm tra trùng ID
 function isUniqueID(id) {
   for (let i = 0; i < petArr.length; i++)

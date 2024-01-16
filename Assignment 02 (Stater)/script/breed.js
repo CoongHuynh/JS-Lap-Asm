@@ -1,4 +1,6 @@
 "use strict";
+
+"use strict";
 const breedInput = document.getElementById("input-breed");
 const typeInput = document.getElementById("input-type");
 const btnSubmit = document.getElementById("submit-btn");

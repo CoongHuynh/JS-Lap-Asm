@@ -4,6 +4,7 @@ const navel = document.getElementById("sidebar");
 navel.addEventListener("click", function () {
   this.classList.toggle("active");
 });
+
 // Dữ liệu data cho sẳn mặc định để test mà không cần nhập lúc ban đầu
 const data1 = {
   id: "P001",
@@ -60,7 +61,7 @@ if (!getFromStorage("petArr")) {
 const petArr = getFromStorage("petArr");
 // lấy dữ liệu breedArr
 if (!getFromStorage("breedArr")) {
-  // gán dữ liệu để test
+  // gần dữ liệu để test
   saveToStorage("breedArr", [breed1, breed2, breed3, breed4]);
 }
 const breedArr = getFromStorage("breedArr");

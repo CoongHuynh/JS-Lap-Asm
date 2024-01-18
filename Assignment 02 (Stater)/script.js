@@ -20,9 +20,7 @@ const bmiBtn = document.getElementById("bmi-btn");
 renderTableData(petArr);
 function renderTableData(petArr) {
   tableBodyEl.innerHTML = "";
-  if (typeof petArr === "object" && !Array.isArray(petArr)) {
-    petArr = Object.values(petArr);
-  }
+
   petArr.forEach((pet) => {
     const row = document.createElement("tr");
     row.innerHTML = `

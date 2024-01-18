@@ -1,6 +1,5 @@
 "use strict";
 
-const submitBtn = document.getElementById("submit-btn");
 const idInput = document.getElementById("input-id");
 const nameInput = document.getElementById("input-name");
 const ageInput = document.getElementById("input-age");
@@ -13,6 +12,7 @@ const vaccinatedInput = document.getElementById("input-vaccinated");
 const dewormedInput = document.getElementById("input-dewormed");
 const sterilizedInput = document.getElementById("input-sterilized");
 
+const submitBtn = document.getElementById("submit-btn");
 const tableBodyEl = document.getElementById("tbody");
 const formEl = document.getElementById("container-form");
 
@@ -95,7 +95,7 @@ function editPet(id) {
   // tìm đến dữ liệu của thú cưng cần edit
   const pet = petArr.find((petItem) => petItem.id === id);
   // hiển thị những thông tin của thú cưng lên form nhập
-  idInput.value = id;
+  idInput.value = pet.id;
   nameInput.value = pet.name;
   ageInput.value = pet.age;
   typeInput.value = pet.type;
@@ -157,12 +157,13 @@ submitBtn.addEventListener("click", function () {
 
   //nếu dữ liệu đã chuẩn mới được thêm vào mảng
   if (validate) {
-    saveToStorage("petArr");
     const index = petArr.findIndex((pet) => pet.id === data.id); // hiển thị dữ liệu đã nhập lên bảng
+    data.date = petArr[index].date;
+
     petArr[index] = data;
+    saveToStorage("petArr", petArr);
 
     formEl.classList.add("hide");
-
     renderTableData(petArr);
   }
 });
@@ -175,6 +176,8 @@ function validateData(data) {
   const length = data.length;
   const type = data.type;
   const breed = data.breed;
+
+  // Biến để kiểm tra dữ liệu có hợp lệ hay không
   let check = true;
 
   // validate data

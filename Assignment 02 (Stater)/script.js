@@ -15,7 +15,6 @@ const sterilizedInput = document.getElementById("input-sterilized");
 
 const tableBodyEl = document.getElementById("tbody");
 const healthyBtn = document.getElementById("healthy-btn");
-const bmiBtn = document.getElementById("bmi-btn");
 
 renderTableData(petArr);
 function renderTableData(petArr) {

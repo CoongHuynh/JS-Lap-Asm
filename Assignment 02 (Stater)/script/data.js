@@ -29,19 +29,20 @@ btnImport.addEventListener("click", function () {
   } else {
     const isImport = confirm("Bạn có chắc muốn import ?");
     if (isImport) {
-      const file = fileInput.file[0];
-      const reander = new FileReader();
+      const file = fileInput.files[0];
+      const reader = new FileReader();
 
-      reander.addEventListener("load", function () {
-        const isValidateFile = checkFile(JSON.parse(reander.result));
-        if (isValidateFile) {
-          savToStorage("petArr", JSON.parse(reander.result));
+      reader.addEventListener(
+        "load",
+        function () {
+          saveToStorage("petArr", JSON.parse(reader.result));
           alert("Đã thêm dữ liệu");
-        }
-      });
+        },
+        false
+      );
 
       if (file) {
-        reander.readAsText(file);
+        reader.readAsText(file);
       }
       fileInput.value = "";
     }

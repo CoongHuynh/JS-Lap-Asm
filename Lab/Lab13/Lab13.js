@@ -31,7 +31,7 @@ Nam.accelerate();
 Nam.brake();
 
 ///////////////// Lab 13.2
-console.log("\nLap 13.2 ------------------------");
+console.log("\n\nLap 13.2 ------------------------");
 class CarCl {
   constructor(make, speed) {
     this.make = make;
@@ -70,3 +70,61 @@ Namcl.brake();
 console.log(`Tốc độ hiện tại là: ${Namcl.speedUS} meli/h`);
 Namcl.speedUS = 250;
 console.log(Namcl);
+
+/////////////Lab 13.3
+console.log("\n\n Lab 13.3 --------------------");
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+
+EV.prototype = Object.create(Car.prototype);
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  return (this.charge = chargeTo);
+};
+
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}%`
+  );
+};
+
+const electricCar = new EV("Tesla", 120, 23);
+
+console.log(`Mức pin thử nghiêm: ${electricCar.chargeBattery(70)}`);
+console.log(electricCar);
+electricCar.accelerate();
+
+electricCar.brake();
+
+///////Lab 13.4
+console.log("\n\n Lab 13.4 -------------------");
+class EVCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    return (this.#charge = chargeTo);
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `Tesla going at ${this.speed} km/h, with a charge of ${this.#charge}%`
+    );
+  }
+}
+
+const electricCarCl = new EV("Rivian", 120, 23);
+console.log(`Mức pin thử nghiệm: ${electricCarCl.chargeBattery(50)}`);
+console.log(electricCarCl);
+electricCarCl.accelerate();
+
+electricCarCl.brake();

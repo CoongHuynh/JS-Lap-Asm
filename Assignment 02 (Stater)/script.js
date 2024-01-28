@@ -219,7 +219,7 @@ function validateData(data) {
     alert("Please select Type!");
     check = false;
   }
-  console.log(data);
+
   // Kiểm tra trường Breed đã được chọn
   if (breed === "Select Breed") {
     alert("Please select Breed!");

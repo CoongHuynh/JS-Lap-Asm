@@ -1,0 +1,14 @@
+body {
+  background: linear-gradient(to top left, #28b487, #7dd56f);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h2 {
+  font-size: 2rem;
+}

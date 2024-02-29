@@ -14,7 +14,7 @@ if (activeUser) {
   async function getDataNews(country, page) {
     try {
       const res = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=${country}&category=${activeUser.category}&pageSize=${activeUser.pageSize}&page=${page}&apiKey=c8398b981077410a83646fd03d12a5a0`
+        `https://newsapi.org/v2/top-headlines?country=${country}&pageSize=${activeUser.pageSize}&page=${page}&apiKey=c8398b981077410a83646fd03d12a5a0`
       );
       const data = await res.json();
       console.log(data);
@@ -73,7 +73,7 @@ if (activeUser) {
 
     //   tạo code hiển thị bài viêt
     //   no_image_available.png hiển thị ảnh lỗi
-    data.acticles.foreach(function () {
+    data.acticles.forEach(function () {
       html += `
     <div class="new-content">
     <div class="img-banner">
